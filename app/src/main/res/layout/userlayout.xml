@@ -13,7 +13,10 @@
         android:layout_centerVertical="true"
         android:elevation="5dp"
         app:cardCornerRadius="80dp">
-
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </androidx.cardview.widget.CardView>
 
     <TextView
@@ -29,10 +32,7 @@
         android:text="Subhash Choudhary"
         android:textSize="22sp" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/image_recycler"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+
 
     <TextView
         android:id="@+id/tv_statusrecycler"

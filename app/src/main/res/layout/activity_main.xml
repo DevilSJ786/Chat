@@ -32,8 +32,8 @@
         android:contentDescription="@string/app_name"
         app:tabIndicatorAnimationMode="elastic"
         app:tabIndicatorColor="@color/black"
-        app:tabSelectedTextColor="@color/white"
-        app:tabTextColor="@color/teal_200">
+        app:tabSelectedTextColor="@color/teal_200"
+        app:tabTextColor="@color/white">
 
     </com.google.android.material.tabs.TabLayout>
     <androidx.viewpager2.widget.ViewPager2

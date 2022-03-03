@@ -42,13 +42,7 @@ public class HomeFragment extends Fragment {
         homeAdapter.startListening();
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (homeAdapter != null) {
-            homeAdapter.stopListening();
-        }
-    }
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -76,6 +70,9 @@ public class HomeFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        if (homeAdapter != null) {
+            homeAdapter.stopListening();
+        }
         binding = null;
     }
 

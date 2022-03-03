@@ -79,9 +79,11 @@ public class Setprofile extends AppCompatActivity {
         userRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                assert value != null;
                 if (value.exists()) {
                     userProfile userProfile = value.toObject(userProfile.class);
                     Log.d("subhash", "onEvent: "+Setprofile.this);
+                    assert userProfile != null;
                     Glide
                             .with(Setprofile.this)
                             .load(userProfile.getImage())
