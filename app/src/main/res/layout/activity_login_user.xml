@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".LoginUser">
+
+    <RelativeLayout
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true" />
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/ic_launcher_foreground" />
+
+    <com.hbb20.CountryCodePicker
+        android:id="@+id/countrycodepicker"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_above="@+id/line"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        app:ccp_areaCodeDetectedCountry="true"
+        app:ccp_autoDetectCountry="true" />
+
+    <EditText
+        android:id="@+id/getphonenumber"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/countrycodepicker"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="70dp"
+        android:hint="Enter Phone number"
+        android:inputType="number"
+        android:textAlignment="center" />
+    <EditText
+        android:id="@+id/getotpnumber"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/getphonenumber"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="70dp"
+        android:hint="Enter OTP number"
+        android:visibility="gone"
+        android:inputType="number"
+        android:textAlignment="center" />
+
+    <android.widget.Button
+        android:id="@+id/sendotpButton"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@+id/getotpnumber"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:background="@android:color/transparent"
+        android:text="Send OTP"
+        android:textColor="@color/purple_700"
+        android:textSize="15sp" />
+
+    <android.widget.Button
+        android:id="@+id/verifyotpButton"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@+id/sendotpButton"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"
+        android:layout_marginBottom="175dp"
+        android:background="@android:color/transparent"
+        android:text="@string/verify_otp"
+        android:textColor="@color/purple_700"
+        android:textSize="15sp" />
+
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/logo"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/progressbar"
+        android:visibility="gone"
+        android:layout_marginTop="30dp"/>
+
+</RelativeLayout>

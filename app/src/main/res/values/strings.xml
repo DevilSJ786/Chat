@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">ChatApplication</string>
+    <string name="enter_otp_number">Enter OTP number</string>
+    <string name="verify_otp">Verify OTP</string>
+    <string name="resend_otp">Resend OTP</string>
+    <string name="from">From</string>
+    <string name="sj_project">SJ Project</string>
+    <string name="profile">Profile</string>
+    <string name="logout">Logout</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_chat">ChatActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+</resources>

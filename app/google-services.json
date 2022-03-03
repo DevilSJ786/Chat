@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "657645902899",
+    "project_id": "chatapplication-a4085",
+    "storage_bucket": "chatapplication-a4085.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:657645902899:android:8dd23c1dd57577e61f9746",
+        "android_client_info": {
+          "package_name": "com.devil.chatapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "657645902899-737mfr5ehn2ej03ac305nqtvkhgbmo3d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBosWsTGRSPi1B-RQABiZBoTmbDITwgEu8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "657645902899-737mfr5ehn2ej03ac305nqtvkhgbmo3d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
