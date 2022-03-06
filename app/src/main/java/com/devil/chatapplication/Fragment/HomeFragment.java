@@ -50,8 +50,8 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         binding=FragmentHomeBinding.inflate(inflater, container, false);
 
-        Query query =  collectionReference_poll.orderBy("name", Query.Direction.DESCENDING);
-        Log.d("rohit", "query: "+query);
+        Query query =  collectionReference_poll.whereNotEqualTo("uid",FirebaseAuth.getInstance().getUid());
+
         FirestoreRecyclerOptions<userProfile> allusersPoll = new FirestoreRecyclerOptions.Builder<userProfile>()
                 .setQuery(query,userProfile.class).build();
 
@@ -64,7 +64,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Log.d("rohit", "onvc: ");
     }
 
     @Override

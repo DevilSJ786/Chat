@@ -3,7 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/subha/AndroidStudioProjects/ChatApplication/app/src/main/res/layout/activity_chat.xml" value="0.2359375" />
+        <entry key="..\:/Users/subha/AndroidStudioProjects/ChatApplication/app/src/main/res/layout/activity_chat.xml" value="0.264" />
         <entry key="..\:/Users/subha/AndroidStudioProjects/ChatApplication/app/src/main/res/layout/activity_flash_screen.xml" value="0.25" />
         <entry key="..\:/Users/subha/AndroidStudioProjects/ChatApplication/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Users/subha/AndroidStudioProjects/ChatApplication/app/src/main/res/layout/activity_login_user.xml" value="0.25" />
@@ -12,6 +12,7 @@
         <entry key="..\:/Users/subha/AndroidStudioProjects/ChatApplication/app/src/main/res/layout/activity_setprofile.xml" value="0.152" />
         <entry key="..\:/Users/subha/AndroidStudioProjects/ChatApplication/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/Users/subha/AndroidStudioProjects/ChatApplication/app/src/main/res/layout/userlayout.xml" value="0.1" />
+        <entry key="..\:/Users/subha/AndroidStudioProjects/ChatApplication/app/src/main/res/menu/chatmenu.xml" value="0.25" />
         <entry key="..\:/Users/subha/AndroidStudioProjects/ChatApplication/app/src/main/res/menu/menu.xml" value="0.25" />
       </map>
     </option>

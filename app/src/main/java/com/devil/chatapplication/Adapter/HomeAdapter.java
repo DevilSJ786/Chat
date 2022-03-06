@@ -2,6 +2,7 @@ package com.devil.chatapplication.Adapter;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.devil.chatapplication.ChatActivity;
 import com.devil.chatapplication.Models.userProfile;
 import com.devil.chatapplication.databinding.UserlayoutBinding;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
@@ -40,8 +42,11 @@ public class HomeAdapter extends FirestoreRecyclerAdapter<userProfile, HomeAdapt
         holder.bind.cardviewrecycler.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                        Intent intent=new Intent(getActivity(), ChatActivity.class);
-//                        startActivity(intent);
+
+                        Intent intent=new Intent(view.getContext(), ChatActivity.class);
+                         intent.putExtra("itemId",model.getUid());
+                         view.getContext().startActivity(intent);
+
             }
         });
     }
