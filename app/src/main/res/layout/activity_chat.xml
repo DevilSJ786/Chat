@@ -75,9 +75,10 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_chat"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/cardview_message"
         android:layout_below="@+id/toolbarchat"
+        android:layout_centerHorizontal="true"
         android:padding="5dp" />
 
     <androidx.cardview.widget.CardView
@@ -98,6 +99,7 @@
             android:layout_height="match_parent">
 
             <EditText
+                android:id="@+id/sendMessagetext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"

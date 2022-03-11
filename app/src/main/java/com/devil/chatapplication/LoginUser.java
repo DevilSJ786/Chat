@@ -1,33 +1,21 @@
 package com.devil.chatapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.devil.chatapplication.databinding.ActivityLoginUserBinding;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.TaskExecutors;
 import com.google.firebase.FirebaseException;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
-import com.google.firebase.firestore.DocumentReference;
 
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -42,22 +30,26 @@ public class LoginUser extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityLoginUserBinding.inflate(getLayoutInflater());
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(binding.getRoot());
 
         mAuth = FirebaseAuth.getInstance();
         countryCode = binding.countrycodepicker.getDefaultCountryCodeWithPlus();
         binding.countrycodepicker.setOnCountryChangeListener(() -> countryCode = binding.countrycodepicker.getSelectedCountryCodeWithPlus());
+
         binding.sendotpButton.setOnClickListener(v -> {
             if (binding.getphonenumber.getText().toString().length() != 10) {
-                Toast.makeText(LoginUser.this, "Please enter a valid phone number.", Toast.LENGTH_SHORT).show();
+                binding.phoneNumberlayout.setHelperText("Must be 10 Digits");
             } else {
 
                 String phone = countryCode + binding.getphonenumber.getText().toString();
                 binding.getphonenumber.setVisibility(View.GONE);
+                binding.phoneNumberlayout.setVisibility(View.GONE);
+                binding.otpnumberlayout.setVisibility(View.VISIBLE);
                 binding.progressbar.setVisibility(View.VISIBLE);
                 binding.getotpnumber.setVisibility(View.VISIBLE);
                 binding.verifyotpButton.setVisibility(View.VISIBLE);
+                binding.sendotpButton.setClickable(false);
                 sendVerificationCode(phone);
             }
         });
@@ -72,13 +64,16 @@ public class LoginUser extends AppCompatActivity {
         });
     }
 
+
     private void signInWithCredential(PhoneAuthCredential credential) {
 
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Intent i = new Intent(LoginUser.this, Setprofile.class);
+                        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(i);
+                        finishAffinity();
 
                     } else {
                         Toast.makeText(LoginUser.this, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_LONG).show();
@@ -102,7 +97,7 @@ public class LoginUser extends AppCompatActivity {
             mCallBack = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
         @Override
-        public void onCodeSent(String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+        public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
             super.onCodeSent(s, forceResendingToken);
             binding.progressbar.setVisibility(View.GONE);
             verificationId = s;
@@ -127,5 +122,6 @@ public class LoginUser extends AppCompatActivity {
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, code);
         signInWithCredential(credential);
     }
+
 
 }

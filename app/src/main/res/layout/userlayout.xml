@@ -7,8 +7,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardviewrecycler"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
         android:elevation="5dp"
@@ -20,32 +20,37 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/tv_userrecycler"
+        android:id="@+id/usernametv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/cardviewrecycler"
         android:ems="10"
         android:text="Subhash Choudhary"
-        android:textSize="22sp" />
-
+        android:textSize="18sp" />
 
 
     <TextView
-        android:id="@+id/tv_statusrecycler"
+        android:id="@+id/lastMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_userrecycler"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="5dp"
+        android:layout_below="@+id/usernametv"
+        android:layout_marginStart="30dp"
         android:layout_toEndOf="@+id/cardviewrecycler"
         android:ems="10"
-        android:text="Online"
+        android:text="Tap to Chat"
         android:textColor="#31E339"
-        android:textSize="22sp" />
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/lastimeSeen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="5dp"
+        android:text="9:17 pm" />
 
 </RelativeLayout>

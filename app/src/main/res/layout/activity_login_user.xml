@@ -31,56 +31,79 @@
         android:layout_marginRight="100dp"
         app:ccp_areaCodeDetectedCountry="true"
         app:ccp_autoDetectCountry="true" />
-
-    <EditText
-        android:id="@+id/getphonenumber"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/phone_numberlayout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/countrycodepicker"
         android:layout_marginLeft="70dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="70dp"
-        android:hint="Enter Phone number"
-        android:inputType="number"
-        android:textAlignment="center" />
-    <EditText
-        android:id="@+id/getotpnumber"
+        app:helperText="Required"
+        app:helperTextTextColor="@android:color/holo_red_dark"
+        app:counterEnabled="true"
+        app:counterMaxLength="10"
+        app:startIconDrawable="@drawable/ic_baseline_phone_24"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+           android:id="@+id/getphonenumber"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:lines="1"
+            android:cursorVisible="true"
+            android:inputType="number"
+            android:hint="@string/phone_number"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/otpnumberlayout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@id/getphonenumber"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/countrycodepicker"
         android:layout_marginLeft="70dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="70dp"
-        android:hint="Enter OTP number"
         android:visibility="gone"
-        android:inputType="number"
-        android:textAlignment="center" />
+        app:helperText="Required"
+        app:helperTextTextColor="@android:color/holo_red_dark"
+        app:counterEnabled="true"
+        app:counterMaxLength="6"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/getotpnumber"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:lines="1"
+            android:cursorVisible="true"
+            android:visibility="gone"
+            android:inputType="number"
+            android:hint="@string/otp_verification"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <android.widget.Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/sendotpButton"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_below="@+id/getotpnumber"
+        android:layout_height="45dp"
+        android:layout_below="@+id/countrycodepicker"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:background="@android:color/transparent"
-        android:text="Send OTP"
+        android:layout_marginTop="110dp"
+        android:text="@string/send_otp"
         android:textColor="@color/purple_700"
         android:textSize="15sp" />
 
-    <android.widget.Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/verifyotpButton"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="45dp"
         android:layout_below="@+id/sendotpButton"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:visibility="gone"
-        android:layout_marginBottom="175dp"
-        android:background="@android:color/transparent"
-        android:text="@string/verify_otp"
+        android:layout_marginTop="10dp"
+       android:visibility="gone"
         android:textColor="@color/purple_700"
+        android:text="@string/verify_otp"
         android:textSize="15sp" />
 
 

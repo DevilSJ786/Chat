@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.ChatApplication" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/spcolorlite</item>
+        <item name="colorPrimaryVariant">@color/spcolor</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -14,16 +14,16 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.ChatApplication.Fullscreen" parent="Theme.ChatApplication">
-        <item name="android:actionBarStyle">
-            @style/Widget.Theme.ChatApplication.ActionBar.Fullscreen
-        </item>
-        <item name="android:windowActionBarOverlay">true</item>
-        <item name="android:windowBackground">@null</item>
-    </style>
+<!--    <style name="Theme.ChatApplication.Fullscreen" parent="Theme.ChatApplication">-->
+<!--        <item name="android:actionBarStyle">-->
+<!--            @style/Widget.Theme.ChatApplication.ActionBar.Fullscreen-->
+<!--        </item>-->
+<!--        <item name="android:windowActionBarOverlay">true</item>-->
+<!--        <item name="android:windowBackground">@null</item>-->
+<!--    </style>-->
 
-    <style name="ThemeOverlay.ChatApplication.FullscreenContainer" parent="">
-        <item name="fullscreenBackgroundColor">@color/light_blue_600</item>
-        <item name="fullscreenTextColor">@color/light_blue_A200</item>
-    </style>
+<!--    <style name="ThemeOverlay.ChatApplication.FullscreenContainer" parent="">-->
+<!--        <item name="fullscreenBackgroundColor">@color/light_blue_600</item>-->
+<!--        <item name="fullscreenTextColor">@color/light_blue_A200</item>-->
+<!--    </style>-->
 </resources>

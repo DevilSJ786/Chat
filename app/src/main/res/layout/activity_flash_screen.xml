@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple_200"
+    android:background="@color/spcolor"
     tools:context=".FlashScreen">
 
     <ImageView
         android:id="@+id/app_image"
-        android:layout_width="150dp"
-        android:layout_height="150sp"
-        android:src="@drawable/ic_launcher_foreground"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/start_icon"
         android:layout_centerInParent="true"
        />
     <TextView
