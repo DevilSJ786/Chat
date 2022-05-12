@@ -3,12 +3,21 @@ package com.devil.chatapplication.Models;
 import com.google.firebase.Timestamp;
 
 public class Message {
-    private String messageId,message,senderid;
+    private String messageId,message,senderid,url;
     private int feeling;
     private Long timestamp;
 
     public String getMessageId() {
         return messageId;
+    }
+
+    public Message(String messageId, String message, String senderid, String url, int feeling, Long timestamp) {
+        this.messageId = messageId;
+        this.message = message;
+        this.senderid = senderid;
+        this.url = url;
+        this.feeling = feeling;
+        this.timestamp = timestamp;
     }
 
     public Message(String message, String senderid, Long timestamp) {
@@ -67,5 +76,13 @@ public class Message {
 
     public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

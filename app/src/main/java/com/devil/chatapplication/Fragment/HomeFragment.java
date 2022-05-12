@@ -1,7 +1,6 @@
 package com.devil.chatapplication.Fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,14 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.devil.chatapplication.Adapter.HomeAdapter;
 import com.devil.chatapplication.Models.userProfile;
 import com.devil.chatapplication.databinding.FragmentHomeBinding;
-import com.devil.chatapplication.databinding.UserlayoutBinding;
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
@@ -50,7 +45,7 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         binding=FragmentHomeBinding.inflate(inflater, container, false);
 
-        Query query =  collectionReference_poll.whereNotEqualTo("uid",FirebaseAuth.getInstance().getUid());
+        Query query =  collectionReference_poll.whereEqualTo("friendlist."+FirebaseAuth.getInstance().getUid(),true);
 
         FirestoreRecyclerOptions<userProfile> allusersPoll = new FirestoreRecyclerOptions.Builder<userProfile>()
                 .setQuery(query,userProfile.class).build();
@@ -58,6 +53,7 @@ public class HomeFragment extends Fragment {
         homeAdapter=new HomeAdapter(allusersPoll,requireContext());
         binding.recyclerViewHome.setLayoutManager(new LinearLayoutManager(requireActivity()));
         binding.recyclerViewHome.setAdapter(homeAdapter);
+
         return binding.getRoot();
     }
 

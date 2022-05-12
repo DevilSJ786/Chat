@@ -5,8 +5,6 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
     <color name="spcolor">#E352CA</color>
     <color name="spcolorlite">#F19BE2</color>
     <color name="light_blue_600">#FF039BE5</color>
@@ -14,4 +12,12 @@
     <color name="light_blue_A200">#FF40C4FF</color>
     <color name="light_blue_A400">#FF00B0FF</color>
     <color name="black_overlay">#66000000</color>
+
+    <color name="Teal_Green">#128C7E</color>
+    <color name="Teal_Green_Dark">#68075140</color>
+    <color name="Light_Green">#25D366</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="send">#73DF9C</color>
+    <color name="recive">#73DF9C</color>
 </resources>

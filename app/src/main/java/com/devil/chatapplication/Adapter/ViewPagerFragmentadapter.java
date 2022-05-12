@@ -10,7 +10,7 @@ import com.devil.chatapplication.Fragment.StatusFragment;
 
 public class ViewPagerFragmentadapter extends FragmentStateAdapter {
 
-    private String[] title = new String[]{"Home", "Status"};
+    private  String[] title = new String[]{"Home", "Status"};
 
     public ViewPagerFragmentadapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);

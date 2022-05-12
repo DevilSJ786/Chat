@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    android:id="@+id/layout_message_delete"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:textColor="@android:color/holo_red_dark"
+        style="@style/popuptext"
+        android:id="@+id/delete_everyone"
+        android:text="@string/delete_for_everyone" />
+
+    <TextView
+        android:textColor="@color/Light_Green"
+        style="@style/popuptext"
+        android:id="@+id/cancel"
+        android:text="@string/cancel" />
+
+    <TextView
+        android:textColor="@android:color/holo_red_light"
+        android:id="@+id/delete_me"
+        android:text="@string/delete_for_me"
+        style="@style/popuptext" />
+
+</LinearLayout>

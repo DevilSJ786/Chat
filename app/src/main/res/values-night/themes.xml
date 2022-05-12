@@ -2,9 +2,12 @@
     <!-- Base application theme. -->
     <style name="Theme.ChatApplication" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/spcolorlite</item>
-        <item name="colorPrimaryVariant">@color/spcolor</item>
+        <item name="colorPrimary">@color/Teal_Green_Dark</item>
+        <item name="colorPrimaryVariant">@color/Teal_Green_Dark</item>
         <item name="colorOnPrimary">@color/black</item>
+        <item name="tabBackground">@color/Teal_Green_Dark</item>
+        <item name="android:toolbarStyle">@color/Teal_Green_Dark</item>
+        <item name="android:textColorPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_200</item>

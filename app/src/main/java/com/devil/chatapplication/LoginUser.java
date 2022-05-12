@@ -1,13 +1,17 @@
 package com.devil.chatapplication;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.devil.chatapplication.databinding.ActivityLoginUserBinding;
@@ -24,6 +28,7 @@ public class LoginUser extends AppCompatActivity {
 
     private ActivityLoginUserBinding binding;
     private FirebaseAuth mAuth;
+    String phone;
     private String verificationId, countryCode;
 
     @Override
@@ -37,12 +42,27 @@ public class LoginUser extends AppCompatActivity {
         countryCode = binding.countrycodepicker.getDefaultCountryCodeWithPlus();
         binding.countrycodepicker.setOnCountryChangeListener(() -> countryCode = binding.countrycodepicker.getSelectedCountryCodeWithPlus());
 
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        AlertDialog.Builder builder = new AlertDialog.Builder(LoginUser.this);
+
+        builder.setMessage("No Internet Connection!");
+        builder.setTitle("Alert !");
+        builder.setCancelable(true);
+        AlertDialog alertDialog = builder.create();
+        if (networkInfo != null && networkInfo.isConnected()) {
+            alertDialog.cancel();
+        } else {
+            alertDialog.show();
+        }
+
         binding.sendotpButton.setOnClickListener(v -> {
-            if (binding.getphonenumber.getText().toString().length() != 10) {
+            if (Objects.requireNonNull(binding.getphonenumber.getText()).toString().length() != 10) {
                 binding.phoneNumberlayout.setHelperText("Must be 10 Digits");
             } else {
 
-                String phone = countryCode + binding.getphonenumber.getText().toString();
+                phone = countryCode + binding.getphonenumber.getText().toString();
                 binding.getphonenumber.setVisibility(View.GONE);
                 binding.phoneNumberlayout.setVisibility(View.GONE);
                 binding.otpnumberlayout.setVisibility(View.VISIBLE);
@@ -56,11 +76,12 @@ public class LoginUser extends AppCompatActivity {
 
 
         binding.verifyotpButton.setOnClickListener(v -> {
-            if (TextUtils.isEmpty(binding.getotpnumber.getText().toString())) {
-                Toast.makeText(LoginUser.this, "Please enter OTP", Toast.LENGTH_SHORT).show();
-            } else {
+            if (Objects.requireNonNull(binding.getotpnumber.getText()).toString().length() != 6) {
+                binding.otpnumberlayout.setHelperText("Must be 6 Digits");
+            } else if (Objects.requireNonNull(binding.getotpnumber.getText()).toString().length() == 0) {
+                binding.otpnumberlayout.setHelperText("Enter 6 Digits OTP");
+            } else
                 verifyCode(binding.getotpnumber.getText().toString());
-            }
         });
     }
 
@@ -92,7 +113,7 @@ public class LoginUser extends AppCompatActivity {
         PhoneAuthProvider.verifyPhoneNumber(options);
     }
 
-    private PhoneAuthProvider.OnVerificationStateChangedCallbacks
+    private final PhoneAuthProvider.OnVerificationStateChangedCallbacks
 
             mCallBack = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
@@ -123,5 +144,9 @@ public class LoginUser extends AppCompatActivity {
         signInWithCredential(credential);
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        binding = null;
+    }
 }

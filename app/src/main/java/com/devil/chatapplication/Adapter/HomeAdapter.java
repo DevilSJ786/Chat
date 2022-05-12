@@ -1,6 +1,5 @@
 package com.devil.chatapplication.Adapter;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.text.format.DateUtils;
@@ -8,25 +7,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.devil.chatapplication.ChatActivity;
 import com.devil.chatapplication.Models.userProfile;
+import com.devil.chatapplication.R;
 import com.devil.chatapplication.databinding.UserlayoutBinding;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 
-import java.text.SimpleDateFormat;
 import java.util.Objects;
 
 public class HomeAdapter extends FirestoreRecyclerAdapter<userProfile, HomeAdapter.userViewholder> {
@@ -39,18 +35,12 @@ public class HomeAdapter extends FirestoreRecyclerAdapter<userProfile, HomeAdapt
     public HomeAdapter(@NonNull FirestoreRecyclerOptions<userProfile> options, Context c) {
         super(options);
         this.context = c;
-
-
     }
 
-    @Override
-    public int getItemViewType(int position) {
-//        Log.d("TAG", "getItemViewType: "+getItem(position).getUid());
-        return super.getItemViewType(position);
-    }
 
     @Override
     protected void onBindViewHolder(@NonNull userViewholder holder, int position, @NonNull userProfile model) {
+        holder.itemView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.item_fall_down));
         holder.bind.usernametv.setText(model.getName());
 
         firestore = FirebaseFirestore.getInstance();
@@ -59,15 +49,13 @@ public class HomeAdapter extends FirestoreRecyclerAdapter<userProfile, HomeAdapt
         senderRoom = receiverId + senderId;
         documentReference = firestore.collection("chats").document(senderRoom);
         documentReference.addSnapshotListener((value, error) -> {
-            if (value != null) {
+            if (value != null&&value.exists()) {
 
                 holder.bind.lastMessage.setText(value.getString("lastMessage"));
-//                SimpleDateFormat formatter = new SimpleDateFormat("h:mm a");
-//                holder.bind.lastimeSeen.setText(formatter.format(value.getTimestamp("timestamp").toDate()));
+
                 String timeAgo = (String) DateUtils.getRelativeTimeSpanString(Objects.requireNonNull(value.getTimestamp("timestamp")).getSeconds() * 1000);
                 holder.bind.lastimeSeen.setText(timeAgo);
             }
-//                       holder.bind.lastimeSeen.setText(value);
         });
 
 
@@ -77,12 +65,14 @@ public class HomeAdapter extends FirestoreRecyclerAdapter<userProfile, HomeAdapt
                 .load(model.getImage())
                 .centerCrop()
                 .into(holder.bind.imageRecycler);
-        holder.bind.cardviewrecycler.setOnClickListener(new View.OnClickListener() {
+        holder.bind.usernametv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 Intent intent = new Intent(view.getContext(), ChatActivity.class);
                 intent.putExtra("itemId", model.getUid());
+                intent.putExtra("name",model.getName());
+                intent.putExtra("token",model.getToken());
                 view.getContext().startActivity(intent);
 
             }
@@ -103,7 +93,6 @@ public class HomeAdapter extends FirestoreRecyclerAdapter<userProfile, HomeAdapt
         public userViewholder(@NonNull UserlayoutBinding b) {
             super(b.getRoot());
             bind = b;
-            Log.d("rohit", "holder: ");
         }
     }
 }

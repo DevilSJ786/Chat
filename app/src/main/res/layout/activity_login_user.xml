@@ -15,11 +15,12 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="130dp"
+        android:layout_height="110dp"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:background="@drawable/ic_launcher_foreground" />
+        android:background="@drawable/start_icon" />
 
     <com.hbb20.CountryCodePicker
         android:id="@+id/countrycodepicker"
@@ -43,6 +44,7 @@
         app:helperTextTextColor="@android:color/holo_red_dark"
         app:counterEnabled="true"
         app:counterMaxLength="10"
+        android:layout_centerHorizontal="true"
         app:startIconDrawable="@drawable/ic_baseline_phone_24"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         >
@@ -68,6 +70,7 @@
         app:helperTextTextColor="@android:color/holo_red_dark"
         app:counterEnabled="true"
         app:counterMaxLength="6"
+        android:layout_centerHorizontal="true"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         >
         <com.google.android.material.textfield.TextInputEditText

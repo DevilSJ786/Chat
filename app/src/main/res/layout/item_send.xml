@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp">
 
 
     <TextView
@@ -11,10 +12,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/send_drowable"
-        android:text="@string/welcome"
         android:maxWidth="250dp"
-        android:paddingStart="10dp"
-        android:paddingBottom="20dp"
+        android:minWidth="70dp"
+        android:paddingStart="20dp"
+        android:paddingBottom="30dp"
         android:paddingTop="5dp"
         android:paddingEnd="25dp"
         android:textSize="18sp"
@@ -24,8 +25,8 @@
 
     <ImageView
         android:id="@+id/send_massage_emoji"
-        android:layout_width="16dp"
-        android:layout_height="16dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/send_message_tv"
         app:layout_constraintEnd_toStartOf="@+id/send_message_tv"
@@ -36,7 +37,6 @@
         android:id="@+id/sendtime_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/_9_12_am"
         android:textSize="11sp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"

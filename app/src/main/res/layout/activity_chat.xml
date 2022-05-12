@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ECE5DD"
     tools:context=".ChatActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -14,7 +13,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:background="@color/spcolor"
+        android:background="?android:toolbarStyle"
         app:menu="@menu/chatmenu">
 
         <RelativeLayout
@@ -53,18 +52,21 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="4dp"
+                android:textColor = "?android:textColorPrimary"
                 android:layout_toEndOf="@+id/cardview_chat"
                 android:text="@string/app_name"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
+                android:textColor = "?android:textColorPrimary"
                 android:id="@+id/status_chat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/username_chat"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="4dp"
+                android:visibility="gone"
                 android:layout_toEndOf="@+id/cardview_chat"
                 android:text="@string/online"
                 android:textSize="12sp" />
@@ -79,6 +81,7 @@
         android:layout_above="@+id/cardview_message"
         android:layout_below="@+id/toolbarchat"
         android:layout_centerHorizontal="true"
+        android:layoutAnimation="@anim/layout_fall_down"
         android:padding="5dp" />
 
     <androidx.cardview.widget.CardView
@@ -107,6 +110,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_toStartOf="@+id/cam_message"
                 android:hint="Message"
+                android:textColor = "?android:textColorPrimary"
                 android:inputType="textMultiLine"
                 android:maxWidth="250dp"
                 android:textAlignment="textStart"
@@ -119,7 +123,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="5dp"
-               android:background="@color/fui_transparent"
+                android:background="@color/fui_transparent"
                 android:src="@drawable/ic_baseline_camera_alt_24" />
 
         </RelativeLayout>

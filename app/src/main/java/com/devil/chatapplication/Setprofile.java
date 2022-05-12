@@ -1,10 +1,5 @@
 package com.devil.chatapplication;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -13,20 +8,20 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
-import android.view.WindowManager;
 import android.widget.Toast;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.devil.chatapplication.Models.userProfile;
 import com.devil.chatapplication.databinding.ActivitySetprofileBinding;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -48,13 +43,14 @@ public class Setprofile extends AppCompatActivity {
     private Uri imageuri;
     private String imagetoken;
     private ProgressDialog dialog;
+    private Boolean userexists = false;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivitySetprofileBinding.inflate(getLayoutInflater());
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(binding.getRoot());
 
         dialog = new ProgressDialog(this);
@@ -66,7 +62,6 @@ public class Setprofile extends AppCompatActivity {
                 imageuri = result;
                 dialog.show();
                 sendimagetoStorage();
-                Log.d("king", "photo: " + result);
             }
         });
 
@@ -76,37 +71,32 @@ public class Setprofile extends AppCompatActivity {
 
         storageReference = storage.getReference();
         userRef = firestore.collection("users").document(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()));
-        userRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                assert value != null;
-                if (value.exists()) {
-                    userProfile userProfile = value.toObject(userProfile.class);
-                    Log.d("subhash", "onEvent: "+Setprofile.this);
-                    assert userProfile != null;
-                    Glide
-                            .with(Setprofile.this)
-                            .load(userProfile.getImage())
-                            .centerCrop()
-                            .into(binding.profileImage);
-                    imagetoken = userProfile.getImage();
-                    binding.usernameEt.setText(userProfile.getName());
+        userRef.addSnapshotListener((value, error) -> {
 
-                }
+            if (value != null && value.exists()) {
+                userexists = true;
+                userProfile userProfile = value.toObject(userProfile.class);
+                assert userProfile != null;
+                Glide
+                        .with(Setprofile.this)
+                        .load(userProfile.getImage())
+                        .centerCrop()
+                        .into(binding.profileImage);
+                imagetoken = userProfile.getImage();
+                binding.usernameEt.setText(userProfile.getName());
+
+
             }
         });
+        binding.backButtonProfile.setOnClickListener(view -> finish());
         binding.setImageviewButton.setOnClickListener(view -> {
             mgetContent.launch("image/*");
         });
-        binding.backButton.setOnClickListener(view -> {
-            Intent intent = new Intent(Setprofile.this, MainActivity.class);
-            startActivity(intent);
-            finish();
-        });
+
 
         binding.saveUser.setOnClickListener(view -> {
             if (!TextUtils.isEmpty(binding.usernameEt.getText().toString())) {
-                sendDataForNewUser();
+                sendDataTocloudstore();
 
             } else {
                 Toast.makeText(getApplicationContext(), "enter details", Toast.LENGTH_SHORT).show();
@@ -114,12 +104,6 @@ public class Setprofile extends AppCompatActivity {
         });
 
 
-    }
-
-    private void sendDataForNewUser() {
-        Log.d("king", "on sendData: enter ");
-
-        sendDataTocloudstore();
     }
 
 
@@ -145,27 +129,50 @@ public class Setprofile extends AppCompatActivity {
                             .load(imagetoken)
                             .centerCrop()
                             .into(binding.profileImage);
-                    Log.d("subhash", "photo upl from Storage: " + imagetoken + FirebaseAuth.getInstance().getUid());
                     dialog.dismiss();
                     Map<String, Object> imagedata = new HashMap<>();
                     imagedata.put("image", imagetoken);
                     userRef.update(imagedata);
-                }));
+                })).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(Setprofile.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void sendDataTocloudstore() {
 
-        Map<String, String> userData = new HashMap<>();
-        userData.put("name", binding.usernameEt.getText().toString());
-        userData.put("image", imagetoken);
-        userData.put("uid", firebaseAuth.getUid());
-        userData.put("status", "Online");
-        userRef.set(userData).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                Log.d("king", "user added on Firestore");
-                Toast.makeText(getApplicationContext(), "user is add on firestore", Toast.LENGTH_SHORT).show();
-            }
-        });
+
+        if (userexists) {
+            userRef.update("name",binding.usernameEt.getText().toString()).addOnSuccessListener(unused -> {
+
+            });
+        } else {
+            String number = Objects.requireNonNull(firebaseAuth.getCurrentUser()).getPhoneNumber();
+            Map<String, Boolean> map = new HashMap<>();
+            map.put(firebaseAuth.getUid(), false);
+            userProfile profile = new userProfile();
+            profile.setName(Objects.requireNonNull(binding.usernameEt.getText()).toString());
+            profile.setImage(imagetoken);
+            profile.setNumber(number);
+            profile.setToken("hi");
+            profile.setStatus("online");
+            profile.setUid(firebaseAuth.getUid());
+            profile.setFriendlist(map);
+            userRef.set(profile).addOnSuccessListener(unused -> {
+                Toast.makeText(getApplicationContext(), "Add new User", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Setprofile.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            });
+        }
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        binding = null;
     }
 }

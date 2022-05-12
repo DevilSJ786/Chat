@@ -1,7 +1,10 @@
 package com.devil.chatapplication.Models;
 
+import java.util.Map;
+
 public class userProfile {
-    private String name,status,uid,image;
+    private String name,status,uid,image,token,number;
+    private Map<String,Boolean> friendlist;
 
     public String getName() {
         return name;
@@ -35,6 +38,17 @@ public class userProfile {
         this.image = image;
     }
 
+    public userProfile(String name, String status, String uid, String image, String token, String number, Map<String, Boolean> friendlist) {
+        this.name = name;
+        this.status = status;
+        this.uid = uid;
+        this.image = image;
+        this.token = token;
+        this.number = number;
+        this.friendlist = friendlist;
+    }
+
+
     public userProfile(String name, String status, String uid, String image) {
         this.name = name;
         this.status = status;
@@ -42,6 +56,38 @@ public class userProfile {
         this.image = image;
     }
 
+    public userProfile(String name, String status, String uid, String image, String token) {
+        this.name = name;
+        this.status = status;
+        this.uid = uid;
+        this.image = image;
+        this.token = token;
+    }
+
     public userProfile() {
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public Map<String, Boolean> getFriendlist() {
+        return friendlist;
+    }
+
+    public void setFriendlist(Map<String, Boolean> friendlist) {
+        this.friendlist = friendlist;
     }
 }

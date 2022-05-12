@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="5dp"
     >
 
     <androidx.cardview.widget.CardView
@@ -28,7 +29,7 @@
         android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/cardviewrecycler"
         android:ems="10"
-        android:text="Subhash Choudhary"
+        android:textColor = "?android:textColorPrimary"
         android:textSize="18sp" />
 
 
@@ -40,7 +41,7 @@
         android:layout_marginStart="30dp"
         android:layout_toEndOf="@+id/cardviewrecycler"
         android:ems="10"
-        android:text="Tap to Chat"
+        android:text="@string/tap_to_chat"
         android:textColor="#31E339"
         android:textSize="14sp" />
 
@@ -51,6 +52,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_margin="5dp"
-        android:text="9:17 pm" />
+        android:textColor = "?android:textColorPrimary"
+        />
 
 </RelativeLayout>
